@@ -1,0 +1,23 @@
+08/15
+
+Installing k8s
+
+kubeadm init fails
+
+$ sudo kubeadm init
+[sudo] password for cloud_user:
+[init] Using Kubernetes version: v1.24.3
+[preflight] Running pre-flight checks
+error execution phase preflight: [preflight] Some fatal errors occurred:
+        [ERROR CRI]: container runtime is not running: output: E0815
+        21:48:51.858012    4642 remote_runtime.go:925] "Status from runtime
+        service failed" err="rpc error: code = Unimplemented desc = unknown
+        service runtime.v1alpha2.RuntimeService"
+        time="2022-08-15T21:48:51Z" level=fatal msg="getting status of runtime:
+        rpc error: code = Unimplemented desc = unknown service
+        runtime.v1alpha2.RuntimeService"
+        , error: exit status 1
+
+NEXT:
+Go through the installation docs:
+https://kubernetes.io/docs/setup/production-environment/container-runtimes/#install-and-configure-prerequisites
