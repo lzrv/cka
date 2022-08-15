@@ -37,22 +37,22 @@ sudo systemctl status containerd
 sudo swapoff -a
 
 # add k8s repo
-cat <<EOF > /etc/yum.repos.d/kubernetes.repo
+cat <<EOF | sudo tee /etc/yum.repos.d/kubernetes.repo
 [kubernetes]
 name=Kubernetes
 baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
 enabled=1
-gpgcheck=1
-repo_gpgcheck=1
+gpgcheck=0
+#repo_gpgcheck=1
 gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg
 https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
 EOF
 
 # install kubelet, kubeadm, and kubectl
-sudo yum update -y && sudo  yum install -y kubelet kubeadm kubectl
+sudo yum update -y && sudo yum install -y kubelet-1.24.0 kubeadm-1.24.0 kubectl-1.24.0
 
 # lock versions to prevent automatic updates
 sudo yum install -y yum-versionlock
 
 # initialize k8s
-sudo kubeadm init --pod-network-cidr 192.168.0.0/16 --kubernetes-version 1.24.3
+sudo kubeadm init --pod-network-cidr 192.168.0.0/16 --kubernetes-version 1.24.0
