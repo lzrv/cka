@@ -17,7 +17,36 @@ error execution phase preflight: [preflight] Some fatal errors occurred:
         rpc error: code = Unimplemented desc = unknown service
         runtime.v1alpha2.RuntimeService"
         , error: exit status 1
+Workaround* (doesn't work)
+* https://stackoverflow.com/questions/72504257/i-encountered-when-executing-kubeadm-init-error-issue
+* https://github.com/containerd/containerd/issues/4581
 
 NEXT:
 Go through the installation docs:
+https://kubernetes.io/docs/setup/
 https://kubernetes.io/docs/setup/production-environment/container-runtimes/#install-and-configure-prerequisites
+install test cluster on la
+install minikube
+install hub on kube with synopsysctl / helm
+
+TEST TOOLS:
+
+Kind installed and running fine
+Installing Hub with Helm3
+$ helm repo add synopsys https://sig-repo.synopsys.com/artifactory/sig-cloudnative
+
+$ BD_NAME="bd"
+$ kubectl create ns ${BD_NAME}
+BD_SIZE="sizes-gen03/10sph"
+helm install synopsys/blackduck --name ${BD_NAME} --namespace ${BD_NAME} -f ${BD_SIZE}.yaml --set tlsCertSecretName=${BD_NAME}-blackduck-webserver-certificate
+
+cd /opt/blackduck/hub-2022.7.0/kubernetes/blackduck
+helm install --help
+Usage:
+  helm install [NAME] [CHART] [flags]
+
+$ helm install ${BD_NAME} synopsys/blackduck --namespace ${BD_NAME} -f
+${BD_SIZE}.yaml --set tlsCertSecretName=${BD_NAME}-blackduck-webserver-certifi
+cate
+Error: INSTALLATION FAILED: failed pre-install: unable to build kubernetes
+object for pre-install hook blackduck/templates/postgres-config.yaml: error validating "": error validating data: unknown object type "nil" in ConfigMap.data.HUB_POSTGRES_HOST
