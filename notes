@@ -29,6 +29,7 @@ install test cluster on la
 install minikube
 install hub on kube with synopsysctl / helm
 
+08/16
 TEST TOOLS:
 
 Kind installed and running fine
@@ -38,15 +39,30 @@ $ helm repo add synopsys https://sig-repo.synopsys.com/artifactory/sig-cloudnati
 $ BD_NAME="bd"
 $ kubectl create ns ${BD_NAME}
 BD_SIZE="sizes-gen03/10sph"
-helm install synopsys/blackduck --name ${BD_NAME} --namespace ${BD_NAME} -f ${BD_SIZE}.yaml --set tlsCertSecretName=${BD_NAME}-blackduck-webserver-certificate
 
 cd /opt/blackduck/hub-2022.7.0/kubernetes/blackduck
 helm install --help
 Usage:
   helm install [NAME] [CHART] [flags]
 
-$ helm install ${BD_NAME} synopsys/blackduck --namespace ${BD_NAME} -f
-${BD_SIZE}.yaml --set tlsCertSecretName=${BD_NAME}-blackduck-webserver-certifi
-cate
+$ helm install ${BD_NAME} synopsys/blackduck --namespace ${BD_NAME} -f ${BD_SIZE}.yaml --set tlsCertSecretName=${BD_NAME}-blackduck-webserver-certificate
+
 Error: INSTALLATION FAILED: failed pre-install: unable to build kubernetes
 object for pre-install hook blackduck/templates/postgres-config.yaml: error validating "": error validating data: unknown object type "nil" in ConfigMap.data.HUB_POSTGRES_HOST
+
+08/17
+test with helm2
+
+https://github.com/helm/helm/issues/5100#issuecomment-533787541
+deleted cluster, starting from scratch
+
+# creat cluster with kind
+
+same error: 
+ helm install ${BD_NAME} synopsys/blackduck --namespace ${BD_NAME} -f
+ ${BD_SIZE}.yaml --set
+ tlsCertSecretName=${BD_NAME}-blackduck-webserver-certificate
+ Error: INSTALLATION FAILED: failed pre-install: unable to build kubernetes
+ object for pre-install hook blackduck/templates/postgres-config.yaml: error
+ validating "": error validating data: unknown object type "nil" in
+ ConfigMap.data.HUB_POSTGRES_HOST
