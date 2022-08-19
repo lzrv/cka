@@ -66,3 +66,7 @@ same error:
  object for pre-install hook blackduck/templates/postgres-config.yaml: error
  validating "": error validating data: unknown object type "nil" in
  ConfigMap.data.HUB_POSTGRES_HOST
+ 
+08/19
+
+* fix Github config
