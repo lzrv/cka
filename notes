@@ -76,4 +76,24 @@ same error:
 
 * add ssh keys to the Ubuntu nodes
 ssh-keygen
-scp $K8S_KEY_NAME k8s-ctl:/home/$CLOUDHOME/
+ssh-copy-id -i $K8S_KEY_NAME $K8S_NODE
+
+* fix Ubuntu script(correct Google repo)
+* run script on multiple nodes
+ 1/ Install pssh
+ sudo yum install -y pssh
+ 2/ Create hosts file
+ vi ~/.pssh_hosts
+ Contents
+ [user@]host[:port]
+ 3/ Test
+ pssh -h ~/.pssh_hosts -i "hostname"
+
+* set no sudo passwd
+  with NOPASSWD:ALL still promts for password
+  https://unix.stackexchange.com/questions/666207/setting-nopasswd-for-a-user-still-promts-for-a-password
+
+NEXT: 
+* fix nopasswd sudo
+* run install script with pssh
+  pssh -h ~/.pssh_hosts -o ~/pssh-logs "bash $SCRIPTNAME"
