@@ -70,3 +70,10 @@ same error:
 08/19
 
 * fix Github config
+* fixed apt google repo config
+
+08/20
+
+* add ssh keys to the Ubuntu nodes
+ssh-keygen
+scp $K8S_KEY_NAME k8s-ctl:/home/$CLOUDHOME/
