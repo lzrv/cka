@@ -27,21 +27,20 @@ sudo apt-get update && sudo apt-get install -y containerd
 sudo mkdir -p /etc/containerd
 sudo containerd config default | sudo tee /etc/containerd/config.toml
 
-# Restart containerd to pick new config
+# Restart containerd to pick new config and check status
 sudo systemctl restart containerd
-sudo systemctl status containerd
+echo "Containerd is $(systemctl is-active containerd)"
 
 # Disable swap
 sudo swapoff -a
 
 # Install dependency packages
 sudo apt-get update && sudo apt-get install -y apt-transport-https curl
-curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key
-add -
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 
 # Add Kubernetes to repository list
 cat <<EOF | sudo tee /etc/apt/sources.list.d/kubernetes.list
-deb https://apt.kubernetes.io/ kubernetes-xenial main
+deb http://packages.cloud.google.com/apt/ kubernetes-xenial main
 EOF
 
 # Update package listings
@@ -50,3 +49,8 @@ sudo apt-get install -y kubelet kubeadm kubectl
 
 # Turn off automatic updates
 sudo apt-mark hold kubelet kubeadm kubectl
+
+# Check versions
+kubelet --version
+kubeadm version
+kubectl version
