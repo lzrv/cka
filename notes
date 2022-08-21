@@ -94,6 +94,14 @@ ssh-copy-id -i $K8S_KEY_NAME $K8S_NODE
   https://unix.stackexchange.com/questions/666207/setting-nopasswd-for-a-user-still-promts-for-a-password
 
 NEXT: 
+  
+08/21 
+
 * fix nopasswd sudo
+  1/ check user sudo permissions
+  sudo -l -U cloud_user
+  2/ Edit cloud_user sudo config:
+  sudo visudo -f /etc/sudoers.d/90-cloud-init-users
+
 * run install script with pssh
   pssh -h ~/.pssh_hosts -o ~/pssh-logs "bash $SCRIPTNAME"
