@@ -1,3 +1,4 @@
+#!/bin/bash
 # These steps have to be performed on contol plane and worker nodes
 # Create configuration file for containerd
 cat <<EOF | sudo tee /etc/modules-load.d/containerd.conf
