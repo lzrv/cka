@@ -105,3 +105,31 @@ NEXT:
 
 * run install script with pssh
   pssh -h ~/.pssh_hosts -o ~/pssh-logs "bash $SCRIPTNAME"
+  
+  [FAILURE] Timed out, Killed by signal 9
+  pssh command will only last 60 seconds if you not input -t option.
+
+  pssh -t 3600 -h ~/.pssh_hosts -o ~/pssh-logs "bash 2_configure_nodes_ubuntu.sh"
+
+* initialize cluster
+  1/ On a control plane node 
+
+sudo kubeadm init --pod-network-cidr 192.168.0.0/16 --kubernetes-version 1.24.4
+
+# Setup kubectl
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+kubectl get nodes
+
+# install Calico Networking
+kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
+
+# print cluster join command
+kubeadm token create --print-join-command
+
+  2/ Use the printed join command on the worker nodes to add them to the
+  cluster
+
+  3/ Check installation
+kubectl get nodes
