@@ -157,6 +157,8 @@ kubectl get nodes
 
   4/ Create a persistent volume
   wget https://raw.githubusercontent.com/jenkins-infra/jenkins.io/master/content/doc/tutorials/kubernetes/installing-jenkins-on-kubernetes/jenkins-volume.yaml
+  k apply -f jenkins-volume.yaml
+
 
   5/ Create a service account
   wget https://raw.githubusercontent.com/jenkins-infra/jenkins.io/master/content/doc/tutorials/kubernetes/installing-jenkins-on-kubernetes/jenkins-sa.yaml
@@ -218,15 +220,43 @@ Back-off restarting failed container
     container "jenkins" in pod "jenkins-0" is waiting to start:
     PodInitializing
 
-kubectl get pod jenkins-0 -n jenkins --template
+kubectl get pod jenkins-0 -n jenkins --template '{{.status.initContainerStatuses}}'
 
-'{{.status.initContainerStatuses}}'
-[map[containerID:containerd://679590f019d1dc5189fa64169a4ab4434ec32019e3abcf44b6ff6b93758bbe56
-image:docker.io/jenkins/jenkins:2.346.3-jdk11
-imageID:docker.io/jenkins/jenkins@sha256:cc62444630fb4b7c4694ac6b11b68dc64864a67fd98121194f913027733c9dce
-lastState:map[terminated:map[containerID:containerd://679590f019d1dc5189fa64169a4ab4434ec32019e3abcf44b6ff6b93758bbe56
-exitCode:2 finishedAt:2022-08-22T14:37:11Z reason:Error
-startedAt:2022-08-22T14:37:11Z]] name:init ready:false restartCount:37
-state:map[waiting:map[message:back-off 5m0s restarting failed container=init
-pod=jenkins-0_jenkins(e35c1f0a-726c-4475-9641-4e000ac6b4b8)
-reason:CrashLoopBackOff]]]]
+Change context to the jenkins ns
+kubectl config set-context --current --namespace=jenkins
+
+* Enable kubectl autocompletion 
+
+echo 'source <(kubectl completion bash)' >>~/.bashrc
+echo 'alias k=kubectl' >>~/.bashrc
+echo 'complete -o default -F __start_kubectl k' >>~/.bashrc
+source ~/.bashrc
+
+Check init container logs
+kubectl logs jenkins-0 -c init
+
+/var/jenkins_config/apply_config.sh: 4: cannot create
+/var/jenkins_home/jenkins.install.UpgradeWizard.state: Permission denied
+
+https://github.com/jenkinsci/helm-charts/issues/210
+
+* check applied values
+helm get values jenkins
+
+* add gid annotation to jenkins-volume.yaml
+https://github.com/jenkinsci/helm-charts/issues/210#issuecomment-912690784
+still the same error
+
+* applied podSecurityContextOverride 
+https://github.com/jenkinsci/helm-charts/issues/210#issuecomment-916217915
+
+pod stuck in PENDING status
+describe pod 
+Events
+FailedScheduling 0/3 nodes are available: 3 pod has unbound immediate PersistentVolumeClaims.
+preemption: 0/3 nodes are available: 3 Preemption is not helpful for scheduling.
+https://stackoverflow.com/questions/64341805/2-pod-has-unbound-immediate-persistentvolumeclaims-kubernetes
+
+NEXT:
+* try implementing solution with NFS share as described here:
+https://github.com/jenkinsci/helm-charts/issues/210#issuecomment-1077827937
