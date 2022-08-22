@@ -199,5 +199,34 @@ kubectl get nodes
   
 
 NEXT:
-* Troubleshoot Jenkins Installation
 * write Ubuntu install readme
+
+08/22
+
+* Troubleshoot Jenkins Installation
+kubectl describe pod -n jenkins jenkins-0
+
+Events:
+Back-off restarting failed container
+
+    * containers
+    jenkins
+    config-reload
+
+    kubectl logs -n jenkins jenkins-0 -c jenkins
+    Error from server (BadRequest):
+    container "jenkins" in pod "jenkins-0" is waiting to start:
+    PodInitializing
+
+kubectl get pod jenkins-0 -n jenkins --template
+
+'{{.status.initContainerStatuses}}'
+[map[containerID:containerd://679590f019d1dc5189fa64169a4ab4434ec32019e3abcf44b6ff6b93758bbe56
+image:docker.io/jenkins/jenkins:2.346.3-jdk11
+imageID:docker.io/jenkins/jenkins@sha256:cc62444630fb4b7c4694ac6b11b68dc64864a67fd98121194f913027733c9dce
+lastState:map[terminated:map[containerID:containerd://679590f019d1dc5189fa64169a4ab4434ec32019e3abcf44b6ff6b93758bbe56
+exitCode:2 finishedAt:2022-08-22T14:37:11Z reason:Error
+startedAt:2022-08-22T14:37:11Z]] name:init ready:false restartCount:37
+state:map[waiting:map[message:back-off 5m0s restarting failed container=init
+pod=jenkins-0_jenkins(e35c1f0a-726c-4475-9641-4e000ac6b4b8)
+reason:CrashLoopBackOff]]]]
