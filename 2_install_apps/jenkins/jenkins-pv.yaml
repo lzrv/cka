@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: jenkins-pv
+  namespace: jenkins
+  #annotations:
+  #  pv.beta.kubernetes.io/gid: "1000"
+spec:
+  storageClassName: jenkins-pv
+  accessModes:
+  - ReadWriteMany
+  capacity:
+    storage: 20Gi
+  persistentVolumeReclaimPolicy: Retain
+  #nfs:
+  #  server: 172.31.103.173
+  #  path: /srv/nfs4/kubedata
+  hostPath:
+    path: /kubedata
+
