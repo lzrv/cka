@@ -157,6 +157,7 @@ kubectl get nodes
 
   4/ Create a persistent volume
   wget https://raw.githubusercontent.com/jenkins-infra/jenkins.io/master/content/doc/tutorials/kubernetes/installing-jenkins-on-kubernetes/jenkins-volume.yaml
+  mv jenkins-volume.yaml jenkins-pv.yaml
   k apply -f jenkins-volume.yaml
 
 
@@ -200,8 +201,6 @@ kubectl get nodes
   
   
 
-NEXT:
-* write Ubuntu install readme
 
 08/22
 
@@ -286,4 +285,30 @@ sudo exportfs -v
 5/ Configure clients
 sudo apt update && sudo apt install nfs-common
 sudo mkdir /kubedata
+sudo chmod 777 /kubedata
+sudo mount -t nfs -o vers=4 172.31.103.173:/srv/nfs4/kubedata /kubedata/
+mount.nfs: access denied by server while mounting 172.31.103.173:/kubedata
 
+https://unix.stackexchange.com/questions/106122/mount-nfs-access-denied-by-server-while-mounting-on-ubuntu-machines
+
+6/ Install Jenkins
+Error:
+FailedScheduling 0/3 nodes are available: 3 persistentvolumeclaim not found
+new error:
+pod has unbound immediate PersistentVolumeClaims
+
+7/ Uninstall Jenkins
+helm delete jenkins
+k delete pvc jenkins-pvc
+k delete pv jenkins-pv
+k delete sa jenkins
+
+STATUS: 
+* Jenkins install
+After doing nfs provisioning still get permissions error:
+/var/jenkins_config/apply_config.sh: 4: cannot create
+/var/jenkins_home/jenkins.install.UpgradeWizard.state: Permission denied
+NEXT:
+* Continue troubleshooting jenkins install.
+https://medium.com/@myte/kubernetes-nfs-and-dynamic-nfs-provisioning-97e2afb8b4a9
+* write Ubuntu install readme
