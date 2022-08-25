@@ -6,7 +6,7 @@ metadata:
   #annotations:
   #  pv.beta.kubernetes.io/gid: "1000"
 spec:
-  storageClassName: jenkins-pv
+  storageClassName: ""
   accessModes:
   - ReadWriteMany
   capacity:
@@ -17,4 +17,3 @@ spec:
   #  path: /srv/nfs4/kubedata
   hostPath:
     path: /kubedata
-
