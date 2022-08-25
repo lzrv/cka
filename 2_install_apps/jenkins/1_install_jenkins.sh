@@ -17,15 +17,19 @@ helm repo add jenkinsci https://charts.jenkins.io
 helm repo update
 helm search repo jenkinsci
 
-#  4/ Create a persistent volume
-wget https://raw.githubusercontent.com/jenkins-infra/jenkins.io/master/content/doc/tutorials/kubernetes/installing-jenkins-on-kubernetes/jenkins-volume.yaml
-
-#  5/ Create a service account
+# Create a service account
 wget https://raw.githubusercontent.com/jenkins-infra/jenkins.io/master/content/doc/tutorials/kubernetes/installing-jenkins-on-kubernetes/jenkins-sa.yaml
 kubectl apply -f jenkins-sa.yaml
 
+# Create a persistent volume
+wget https://raw.githubusercontent.com/jenkins-infra/jenkins.io/master/content/doc/tutorials/kubernetes/installing-jenkins-on-kubernetes/jenkins-volume.yaml
+k apply -f jenkins-pv.yaml
+
+# Create a persistent volume claim
+k apply -f jenkins-pvc.yaml
+
 #  6/ Install Jenkins
-#  6.1 
+# 
 wget https://raw.githubusercontent.com/jenkinsci/helm-charts/main/charts/jenkins/values.yaml
 mv values.yaml jenkins-values.yaml
   
@@ -41,6 +45,11 @@ mv values.yaml jenkins-values.yaml
 chart=jenkinsci/jenkins
 helm install jenkins -n jenkins -f jenkins-values.yaml $chart
 
+#  6.6 check install
+kubectl get pods -n jenkins
+k describe pod jenkins-0
+k logs jenkins-0 -c init
+
 #  6.4 Get your 'admin' user password by running:
 jsonpath="{.data.jenkins-admin-password}"
 secret=$(kubectl get secret -n jenkins jenkins -o jsonpath=$jsonpath)
@@ -53,5 +62,8 @@ jsonpath="{.items[0].status.addresses[0].address}"
 NODE_IP=$(kubectl get nodes -n jenkins -o jsonpath=$jsonpath)
 echo http://$NODE_IP:$NODE_PORT/login
 
-#  6.6 check install
-kubectl get pods -n jenkins
+# 7/ Uninstall Jenkins
+# helm delete jenkins
+# k delete pvc jenkins-pvc
+# k delete pv jenkins-pv
+# k delete sa jenkins
