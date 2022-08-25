@@ -10,7 +10,7 @@ spec:
   resources:
     requests:
       storage: 20Gi
-  storageClassName: jenkins-pv
+  storageClassName: ""
   #selector:
   #  matchLabels:
   #    app: jenkins-pv
