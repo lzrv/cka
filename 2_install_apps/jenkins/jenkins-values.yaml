@@ -112,17 +112,17 @@ controller:
   # it might be desirable to use `supplementalGroups` instead of `fsGroup` in
   # the `securityContext` block: https://github.com/kubernetes/kubernetes/issues/67014#issuecomment-589915496
   podSecurityContextOverride:
-    runAsUser: 1000
-    runAsGroup: 1000
-    runAsNonRoot: true
-    fsGroup: 1000
-    fsGroupChangePolicy: "OnRootMismatch"
+    runAsUser: 0
+    runAsGroup: 0
+    #runAsNonRoot: true
+    #fsGroup: 0
+    #fsGroupChangePolicy: "OnRootMismatch"
     #supplementalGroups: [1000]
   #   # capabilities: {}
   # Container securityContext
   containerSecurityContext:
-    runAsUser: 1000
-    runAsGroup: 1000
+    runAsUser: 0
+    runAsGroup: 0
     readOnlyRootFilesystem: true
     allowPrivilegeEscalation: false
   servicePort: 8080
@@ -783,7 +783,8 @@ persistence:
   ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
   ##   GKE, AWS & OpenStack)
   ##
-  storageClass: jenkins-pv
+  storageClass: 
+  storageClassName: ""
   annotations: {}
   labels: {}
   accessMode: "ReadWriteMany"
