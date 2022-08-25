@@ -308,7 +308,33 @@ STATUS:
 After doing nfs provisioning still get permissions error:
 /var/jenkins_config/apply_config.sh: 4: cannot create
 /var/jenkins_home/jenkins.install.UpgradeWizard.state: Permission denied
+
+
+08/25
+
+* Continue troubleshooting jenkins install.
+* updated jenkins deploy config
+
+new error:
+java.io.UncheckedIOException: java.nio.file.FileSystemException: /root/.cache:
+Read-only file system
+https://stackoverflow.com/questions/49614034/kubernetes-deployment-read-only-filesystem-error
+https://www.thorsten-hans.com/read-only-filesystems-in-docker-and-kubernetes/
+https://github.com/jenkinsci/helm-charts/blob/main/charts/jenkins/README.md
+
+
 NEXT:
 * Continue troubleshooting jenkins install.
-https://medium.com/@myte/kubernetes-nfs-and-dynamic-nfs-provisioning-97e2afb8b4a9
+new error:
+java.io.UncheckedIOException: java.nio.file.FileSystemException: /root/.cache:
+Read-only file system
+https://stackoverflow.com/questions/49614034/kubernetes-deployment-read-only-filesystem-error
+https://www.thorsten-hans.com/read-only-filesystems-in-docker-and-kubernetes/
+https://github.com/jenkinsci/helm-charts/blob/main/charts/jenkins/README.md
+
 * write Ubuntu install readme
+
+References:
+* k8s nfs storage
+https://github.com/jenkinsci/helm-charts/blob/main/charts/jenkins/README.md
+
