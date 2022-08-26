@@ -324,6 +324,11 @@ https://github.com/jenkinsci/helm-charts/blob/main/charts/jenkins/README.md
 
 
 NEXT:
+
+* write Ubuntu install readme
+
+08/26
+
 * Continue troubleshooting jenkins install.
 new error:
 java.io.UncheckedIOException: java.nio.file.FileSystemException: /root/.cache:
@@ -332,7 +337,15 @@ https://stackoverflow.com/questions/49614034/kubernetes-deployment-read-only-fil
 https://www.thorsten-hans.com/read-only-filesystems-in-docker-and-kubernetes/
 https://github.com/jenkinsci/helm-charts/blob/main/charts/jenkins/README.md
 
-* write Ubuntu install readme
+Deploying with deployment yaml instead of helm
+1/ create deployment
+wget https://raw.githubusercontent.com/jenkins-infra/jenkins.io/master/content/doc/tutorials/kubernetes/installing-jenkins-on-kubernetes/jenkins-deployment.yaml
+k create -f jenkins-deployment.yaml
+
+2/ create service
+wget https://raw.githubusercontent.com/jenkins-infra/jenkins.io/master/content/doc/tutorials/kubernetes/installing-jenkins-on-kubernetes/jenkins-service.yaml
+
+NEXT:
 
 References:
 * k8s nfs storage
