@@ -344,10 +344,23 @@ k create -f jenkins-deployment.yaml
 
 2/ create service
 wget https://raw.githubusercontent.com/jenkins-infra/jenkins.io/master/content/doc/tutorials/kubernetes/installing-jenkins-on-kubernetes/jenkins-service.yaml
+k create -f jenkins-service.yaml
+
+* added nginx deployment config
+
 
 NEXT:
+* sample TLS application:
+https://mayankkapoor.medium.com/ssl-is-easy-enabling-https-for-your-application-on-kubernetes-easily-with-this-step-by-step-guide-45f7e15f8b7c
+* test centos deploy script on RHEL.
+* test http apps from non-corp laptop
+* test jenkins deployment on killercoda
+https://killercoda.com/playgrounds/scenario/kubernetes
+* TLS in k8s cluster
+https://kubernetes.io/docs/tasks/tls/managing-tls-in-a-cluster/
 
 References:
+* https://limbenjamin.com/articles/running-https-ssh-vpn-on-port-443.html
 * k8s nfs storage
 https://github.com/jenkinsci/helm-charts/blob/main/charts/jenkins/README.md
 
