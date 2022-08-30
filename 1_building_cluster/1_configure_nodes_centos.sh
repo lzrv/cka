@@ -28,6 +28,31 @@ net.ipv4.ip_forward = 1
 net.bridge.bridge-nf-call-ip6tables = 1
 EOF
 
+# ENABLE IPVS
+
+# If ipvs is not enabled, iptables will be used for packet forwarding, but the
+# efficiency is low, so it is recommended to enable ipvs and use
+
+cat <<EOF | sudo tee /etc/sysconfig/modules/ipvs.modules
+#!/bin/bash
+modprobe -- ip_vs
+modprobe -- ip_vs_rr
+modprobe -- ip_vs_wrr
+modprobe -- ip_vs_sh
+modprobe -- nf_conntrack_ipv4
+EOF
+
+# load ipvs module
+chmod 755 /etc/sysconfig/modules/ipvs.modules && bash \
+/etc/sysconfig/modules/ipvs.modules && lsmod | grep -e ip_vs -e \
+nf_conntrack_ipv4
+
+# Installed the ipset package
+yum install ipset -y
+ 
+# Install the management tool ipvsadm
+yum install ipvsadm -y
+
 # Apply new settings
 sudo sysctl --system
 
