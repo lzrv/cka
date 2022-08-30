@@ -1,5 +1,16 @@
 #!/bin/bash
 # These steps have to be performed on contol plane and worker nodes
+
+#disable firewall
+sudo systemctl stop firewalld.service
+sudo systemctl disable firewalld.service
+
+# disable SELinux
+sudo setenforce 0
+sed -i 's/^ *SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
+
+# Adjust kernel parameters and modules
+
 # Create configuration file for containerd
 cat <<EOF | sudo tee /etc/modules-load.d/containerd.conf
 overlay
