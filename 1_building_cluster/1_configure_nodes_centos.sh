@@ -85,6 +85,14 @@ sudo containerd config default | sudo tee /etc/containerd/config.toml
 sudo systemctl restart containerd
 sudo systemctl status containerd
 
+# CONFIGURE CONTAINERD
+# Modify cgroups to systemd
+sed -i 's#SystemdCgroup=false#SystemdCgroup=true#' /etc/containerd/config.toml
+
+# reload configurations and restart the service
+systemctl daemon-reload
+systemctl restart containerd
+
 # disable swap
 sudo swapoff -a
 
