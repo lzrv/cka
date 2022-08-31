@@ -93,6 +93,23 @@ sed -i 's#SystemdCgroup=false#SystemdCgroup=true#' /etc/containerd/config.toml
 systemctl daemon-reload
 systemctl restart containerd
 
+# INSTALL CRI CLIENT CRICTL
+wget
+https://github.com/kubernetes-sigs/cri-tools/releases/download/v1.23.0/crictl-v1.23.0-linux-amd64.tar.gz
+tar zxvf crictl-v1.23.0-linux-amd64.tar.gz -C /usr/local/bin
+
+cat <<EOF | sudo tee /etc/crictl.yaml
+runtime-endpoint: unix:///run/containerd/containerd.sock
+image-endpoint: unix:///run/containerd/containerd.sock
+timeout: 10
+debug: false
+EOF
+
+# Verify that it is available
+crictl pull nginx:alpine
+crictl images
+crictl rmi nginx:alpine
+
 # disable swap
 sudo swapoff -a
 
