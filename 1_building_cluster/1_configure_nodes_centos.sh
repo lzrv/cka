@@ -56,11 +56,26 @@ yum install ipvsadm -y
 # Apply new settings
 sudo sysctl --system
 
-# Install containerd(via docker installation)
-curl -fsSL https://get.docker.com -o get-docker.sh
-sh get-docker.sh
+# INSTALL CONTAINERD
+
+# curl -fsSL https://get.docker.com -o get-docker.sh
+# sh get-docker.sh
 # containerd.io 1.6.7(Release 3.1.el7) installed
 # docker version 20.10.17
+
+# install additional pkgs
+
+yum install -y yum-utils device-mapper-persistent-data lvm2
+
+# add docker repo
+
+sudo yum-config-manager \
+--add-repo \
+https://download.docker.com/linux/centos/docker-ce.repo
+
+# Check out the latest version and install
+yum list containerd --showduplicates | sort -r
+yum install containerd -y
 
 # Generate default containerd configuration and save to the newly created
 # default file 
