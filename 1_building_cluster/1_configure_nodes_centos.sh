@@ -74,7 +74,7 @@ sudo yum-config-manager \
 https://download.docker.com/linux/centos/docker-ce.repo
 
 # Check out the latest version and install
-yum list containerd --showduplicates | sort -r
+# yum list containerd --showduplicates | sort -r
 yum install containerd -y
 
 # Generate default containerd configuration and save to the newly created
@@ -106,9 +106,9 @@ debug: false
 EOF
 
 # Verify that it is available
-crictl pull nginx:alpine
-crictl images
-crictl rmi nginx:alpine
+# crictl pull nginx:alpine
+# crictl images
+# crictl rmi nginx:alpine
 
 # disable swap
 sudo swapoff -a
