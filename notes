@@ -367,3 +367,9 @@ https://github.com/jenkinsci/helm-charts/blob/main/charts/jenkins/README.md
 08/30
 
 * centos install
+
+NEXT:
+
+08/31
+
+* centos install - install containerd w/o docker
