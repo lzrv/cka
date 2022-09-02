@@ -368,8 +368,26 @@ https://github.com/jenkinsci/helm-charts/blob/main/charts/jenkins/README.md
 
 * centos install
 
-NEXT:
-
 08/31
 
 * centos install - install containerd w/o docker
+
+09/01
+
+* centos install
+ - Setting snapshotter to native seems to be solving the issue
+https://github.com/kubernetes-sigs/cri-tools/issues/436#issuecomment-464290289
+
+09/02
+
+* installing cnc on kind
+  1/ Installed version of kind
+  kind v0.11.1 go1.16.4 linux/amd64
+
+  2/ Updating to 0.14
+
+  3/ Setup sig-gitlab access
+
+  4/ Clone cnc repo
+
+  5/ Install
