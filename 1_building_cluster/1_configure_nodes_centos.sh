@@ -7,7 +7,7 @@ sudo systemctl disable firewalld.service
 
 # disable SELinux
 sudo setenforce 0
-sed -i 's/^ *SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
+sudo sed -i 's/^ *SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
 
 # Adjust kernel parameters and modules
 
@@ -80,10 +80,6 @@ yum install containerd -y
 # Generate default containerd configuration and save to the newly created
 # default file 
 sudo containerd config default | sudo tee /etc/containerd/config.toml
-
-# restart containerd to pick up new config, check status
-sudo systemctl restart containerd
-sudo systemctl status containerd
 
 # CONFIGURE CONTAINERD
 # Modify cgroups to systemd
