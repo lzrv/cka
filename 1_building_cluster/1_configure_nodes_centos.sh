@@ -93,8 +93,8 @@ sudo sed -i 's#SystemdCgroup=false#SystemdCgroup=true#' /etc/containerd/config.t
 sudo sed -i -e 's/snapshotter = \"overlayfs\"/snapshotter = \"native\"/g' /etc/containerd/config.toml
 
 # reload configurations and restart the service
-systemctl daemon-reload
-systemctl restart containerd
+sudo systemctl daemon-reload
+sudo systemctl restart containerd
 
 # INSTALL CRI CLIENT CRICTL
 wget
