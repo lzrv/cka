@@ -129,7 +129,10 @@ EOF
 sudo yum update -y && sudo yum install -y kubelet-1.24.0 kubeadm-1.24.0 kubectl-1.24.0
 
 # lock versions to prevent automatic updates
-sudo yum install -y yum-versionlock
+# sudo yum install -y yum-versionlock
+
+sudo systemctl enable kubelet
+sudo systemctl start kubelet
 
 # initialize k8s
 sudo kubeadm init --pod-network-cidr 192.168.0.0/16 --kubernetes-version 1.24.0
