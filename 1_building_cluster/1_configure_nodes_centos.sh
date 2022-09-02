@@ -33,25 +33,25 @@ EOF
 # If ipvs is not enabled, iptables will be used for packet forwarding, but the
 # efficiency is low, so it is recommended to enable ipvs and use
 
-cat <<EOF | sudo tee /etc/sysconfig/modules/ipvs.modules
-#!/bin/bash
-modprobe -- ip_vs
-modprobe -- ip_vs_rr
-modprobe -- ip_vs_wrr
-modprobe -- ip_vs_sh
-modprobe -- nf_conntrack_ipv4
-EOF
+# cat <<EOF | sudo tee /etc/sysconfig/modules/ipvs.modules
+# #!/bin/bash
+# modprobe -- ip_vs
+# modprobe -- ip_vs_rr
+# modprobe -- ip_vs_wrr
+# modprobe -- ip_vs_sh
+# modprobe -- nf_conntrack_ipv4
+# EOF
 
 # load ipvs module
-chmod 755 /etc/sysconfig/modules/ipvs.modules && bash \
-/etc/sysconfig/modules/ipvs.modules && lsmod | grep -e ip_vs -e \
-nf_conntrack_ipv4
+# chmod 755 /etc/sysconfig/modules/ipvs.modules && bash \
+# /etc/sysconfig/modules/ipvs.modules && lsmod | grep -e ip_vs -e \
+# nf_conntrack_ipv4
 
 # Installed the ipset package
-yum install ipset -y
+# yum install ipset -y
  
 # Install the management tool ipvsadm
-yum install ipvsadm -y
+# yum install ipvsadm -y
 
 # Apply new settings
 sudo sysctl --system
@@ -65,7 +65,7 @@ sudo sysctl --system
 
 # install additional pkgs
 
-yum install -y yum-utils device-mapper-persistent-data lvm2
+sudo yum install -y yum-utils device-mapper-persistent-data lvm2
 
 # add docker repo
 
@@ -75,7 +75,7 @@ https://download.docker.com/linux/centos/docker-ce.repo
 
 # Check out the latest version and install
 # yum list containerd --showduplicates | sort -r
-yum install containerd -y
+sudo yum install containerd -y
 
 # Generate default containerd configuration and save to the newly created
 # default file 
@@ -93,8 +93,7 @@ sudo systemctl daemon-reload
 sudo systemctl restart containerd
 
 # INSTALL CRI CLIENT CRICTL
-wget
-https://github.com/kubernetes-sigs/cri-tools/releases/download/v1.23.0/crictl-v1.23.0-linux-amd64.tar.gz
+wget https://github.com/kubernetes-sigs/cri-tools/releases/download/v1.23.0/crictl-v1.23.0-linux-amd64.tar.gz
 tar zxvf crictl-v1.23.0-linux-amd64.tar.gz -C /usr/local/bin
 
 cat <<EOF | sudo tee /etc/crictl.yaml
