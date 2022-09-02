@@ -87,7 +87,8 @@ sudo systemctl status containerd
 
 # CONFIGURE CONTAINERD
 # Modify cgroups to systemd
-sed -i 's#SystemdCgroup=false#SystemdCgroup=true#' /etc/containerd/config.toml
+sudo sed -i 's#SystemdCgroup=false#SystemdCgroup=true#' /etc/containerd/config.toml
+sudo sed -i -e 's/snapshotter = \"overlayfs\"/snapshotter = \"native\"/g' /etc/containerd/config.toml
 
 # reload configurations and restart the service
 systemctl daemon-reload
