@@ -359,10 +359,6 @@ https://killercoda.com/playgrounds/scenario/kubernetes
 * TLS in k8s cluster
 https://kubernetes.io/docs/tasks/tls/managing-tls-in-a-cluster/
 
-References:
-* https://limbenjamin.com/articles/running-https-ssh-vpn-on-port-443.html
-* k8s nfs storage
-https://github.com/jenkinsci/helm-charts/blob/main/charts/jenkins/README.md
 
 08/30
 
@@ -391,3 +387,15 @@ https://github.com/kubernetes-sigs/cri-tools/issues/436#issuecomment-464290289
   4/ Clone cnc repo
 
   5/ Install
+
+09/03
+
+* configuring / working w cnc
+
+
+References:
+* https://limbenjamin.com/articles/running-https-ssh-vpn-on-port-443.html
+* k8s nfs storage
+https://github.com/jenkinsci/helm-charts/blob/main/charts/jenkins/README.md
+* Centos 7 install:
+https://www.soughttech.com/front/article/16709/viewArticle
