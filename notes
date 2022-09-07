@@ -396,10 +396,17 @@ https://github.com/kubernetes-sigs/cri-tools/issues/436#issuecomment-464290289
 
 * configuring / working w cnc
   - deleted cluster
+  NEXT:
   - create a new cert including the current hostname
   - configure the helm chart to use your server's host name instead of
     local.cim.com
 
+09/07
+
+* configuring / working w cnc
+  - create a new cert including the current hostname
+  - configure the helm chart to use your server's host name instead of
+    local.cim.com
 
 
 
