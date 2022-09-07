@@ -392,6 +392,15 @@ https://github.com/kubernetes-sigs/cri-tools/issues/436#issuecomment-464290289
 
 * configuring / working w cnc
 
+09/06
+
+* configuring / working w cnc
+  - deleted cluster
+  - create a new cert including the current hostname
+  - configure the helm chart to use your server's host name instead of
+    local.cim.com
+
+
 
 
 References:
