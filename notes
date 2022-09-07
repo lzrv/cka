@@ -405,8 +405,11 @@ https://github.com/kubernetes-sigs/cri-tools/issues/436#issuecomment-464290289
 
 * configuring / working w cnc
   - create a new cert including the current hostname
+    - created new key/cert
+    - moved them to local-dev/certs
   - configure the helm chart to use your server's host name instead of
     local.cim.com
+    - configured via cnc/values.yaml
 
 
 
