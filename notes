@@ -416,6 +416,10 @@ go cannot parse encrypted key
 per:
 https://github.com/kubernetes/kubernetes/issues/53100#issuecomment-332433555
 
+09/08
+
+* cnc - kind install
+  - pull images
 
 
 References:
