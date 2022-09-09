@@ -421,6 +421,15 @@ https://github.com/kubernetes/kubernetes/issues/53100#issuecomment-332433555
 * cnc - kind install
   - pull images
 
+09/09
+
+* kind - bd deploy
+  1/
+  Create cluster
+
+  kind create cluster
+
+
 
 References:
 * https://limbenjamin.com/articles/running-https-ssh-vpn-on-port-443.html
