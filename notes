@@ -430,6 +430,17 @@ https://github.com/kubernetes/kubernetes/issues/53100#issuecomment-332433555
   kind create cluster
 * Kind by default does not have sufficient resource to schedule all BD services
 
+09/12
+
+* kind - bd deploy
+  - allocate more resources for the kind node
+  - Type LoadBalancer is not supported by Kind out of the box. Test with NodePort. Check if possible to use ingress controller
+
+NEXT:
+- Type LoadBalancer is not supported by Kind out of the box. Test with NodePort. Check if possible to use ingress controller
+
+
+
 
 
 References:
