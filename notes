@@ -441,6 +441,7 @@ NEXT:
     - Check:
       https://mauilion.dev/posts/kind-metallb/
       https://github.com/kubernetes-sigs/kind/issues/1961
+      https://metallb.universe.tf/
 
 
 
