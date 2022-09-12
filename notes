@@ -437,7 +437,10 @@ https://github.com/kubernetes/kubernetes/issues/53100#issuecomment-332433555
   - Type LoadBalancer is not supported by Kind out of the box. Test with NodePort. Check if possible to use ingress controller
 
 NEXT:
-- Type LoadBalancer is not supported by Kind out of the box. Test with NodePort. Check if possible to use ingress controller
+- Type LoadBalancer is not supported by Kind out of the box. Test with NodePort. 
+    - Check if possible to use ingress controller
+      https://kubernetes.io/docs/concepts/services-networking/ingress/#ingress-class
+
     - Check:
       https://mauilion.dev/posts/kind-metallb/
       https://github.com/kubernetes-sigs/kind/issues/1961
