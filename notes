@@ -446,6 +446,9 @@ NEXT:
       https://github.com/kubernetes-sigs/kind/issues/1961
       https://metallb.universe.tf/
 
+09/15
+
+* K8s Centos install script - functionalize
 
 
 
