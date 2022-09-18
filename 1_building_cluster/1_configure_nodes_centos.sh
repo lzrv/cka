@@ -187,7 +187,7 @@ case $1 in
     containerd_inst
     contd_config
     k8s_isnt
-    k8s_setup
+    cplane_setup
     kubectl_setup
     ;;
 
