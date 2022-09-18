@@ -157,9 +157,41 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 kubectl get nodes
 }
 
-initprep
-containerd_inst
-contd_config
-k8s_isnt
-k8s_setup
-kubectl_setup
+function cplane_setup {
+
+sudo systemctl enable kubelet
+sudo systemctl start kubelet
+
+# initialize the cluster
+sudo kubeadm init --pod-network-cidr 192.168.0.0/16 --kubernetes-version 1.24.4
+
+# install Calico Networking
+kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
+
+# print cluster join command
+kubeadm token create --print-join-command
+}
+
+case $1 in 
+  worker)
+    initprep
+    containerd_inst
+    contd_config
+    k8s_isnt
+    k8s_setup
+    kubectl_setup
+    ;;
+    
+  cplane)
+    initprep
+    containerd_inst
+    contd_config
+    k8s_isnt
+    k8s_setup
+    kubectl_setup
+    ;;
+
+  *)
+    echo "usage: 1_configure_nodes_centos.sh [option]"
+    echo "[option]: worker or cplane"
+    ;;
