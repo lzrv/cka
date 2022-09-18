@@ -195,3 +195,4 @@ case $1 in
     echo "usage: 1_configure_nodes_centos.sh [option]"
     echo "[option]: worker or cplane"
     ;;
+esac
