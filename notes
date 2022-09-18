@@ -450,7 +450,17 @@ NEXT:
 
 * K8s Centos install script - functionalize
 
+09/16
 
+* Test Centos functionlized install script
+
+NEXT:
+* Add control plane setup function to the centos script
+
+09/18
+
+NEXT:
+* install script - disable swap permanently
 
 
 References:
